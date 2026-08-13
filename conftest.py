@@ -1,12 +1,13 @@
 import pytest
 from playwright.sync_api import Page, sync_playwright
+from config.settings import HEADLESS
 
 @pytest.fixture
 def page():
 
     with sync_playwright() as playwright:
 
-        browser = playwright.chromium.launch(headless=False)
+        browser = playwright.chromium.launch(HEADLESS)
 
         page = browser.new_page()
 
