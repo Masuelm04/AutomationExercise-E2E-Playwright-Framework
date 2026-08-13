@@ -1,6 +1,6 @@
 from pages.login_page import LoginPage
 from pages.account_page import AccountPage
-from test_data.users import TEST_USER
+from test_data.users import TEST_USER_LOGIN_DATA
 
 def test_invalid_login(page):
 
@@ -30,8 +30,8 @@ def test_user_login(page):
     login_page.navigate()
 
     login_page.login(
-        TEST_USER["email"],
-        TEST_USER["password"]
+        TEST_USER_LOGIN_DATA["email"],
+        TEST_USER_LOGIN_DATA["password"]
     )
 
     account_page = AccountPage(page)

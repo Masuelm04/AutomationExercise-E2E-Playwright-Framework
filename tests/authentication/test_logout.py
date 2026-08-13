@@ -1,6 +1,6 @@
 from pages.account_page import AccountPage
 from pages.login_page import LoginPage
-from test_data.users import TEST_USER
+from test_data.users import TEST_USER_LOGIN_DATA
 
 def test_logout(page):
 
@@ -9,8 +9,8 @@ def test_logout(page):
     login_page.navigate()
 
     login_page.login(
-        TEST_USER["email"],
-        TEST_USER["password"]
+        TEST_USER_LOGIN_DATA["email"],
+        TEST_USER_LOGIN_DATA["password"]
     )
 
     account_page = AccountPage(page)
