@@ -16,6 +16,8 @@ class SignupPage(BasePage):
 
         self.signup_button = page.locator('[data-qa="signup-button"]')
 
+        self.existing_email_error = page.get_by_text("Email Address already exist!")
+
     def navigate(self):
         self.page.goto(self.URL)
 
@@ -25,3 +27,6 @@ class SignupPage(BasePage):
         self.email_input.fill(email)
 
         self.signup_button.click()
+
+    def is_existing_email_error_visible(self) -> bool:
+        return self.existing_email_error.is_visible()

@@ -1,6 +1,7 @@
 from pages.account_information_page import AccountInformationPage
 from pages.signup_page import SignupPage
 from test_data.users import TEST_USER_REGISTRATION_DATA
+from test_data.users import TEST_USER_LOGIN_DATA
 from utils.data_generator import generate_email
 from pages.account_page import AccountPage
 
@@ -40,3 +41,16 @@ def test_user_registration(page):
     account_page = AccountPage(page)
 
     assert account_page.is_user_logged()
+
+def test_registration_with_existing_email(page):
+
+    signup_page = SignupPage(page)
+
+    signup_page.navigate()
+
+    signup_page.signup(
+        TEST_USER_REGISTRATION_DATA["name"],
+        TEST_USER_LOGIN_DATA["email"]
+    )
+
+    assert signup_page.is_existing_email_error_visible()
