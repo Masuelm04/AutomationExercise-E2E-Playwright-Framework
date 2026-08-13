@@ -16,7 +16,7 @@ class LoginPage(BasePage):
 
         self.login_button = page.locator('[data-qa="login-button"]')
 
-        self.error_message = page.locator("p")
+        self.login_error = page.get_by_text("Your email or password is incorrect!")
 
     def navigate(self):
 
@@ -27,3 +27,6 @@ class LoginPage(BasePage):
         self.email_input.fill(email)
         self.password_input.fill(password)
         self.login_button.click()
+
+    def is_login_error_visible(self) -> bool:
+        return self.login_error.is_visible()

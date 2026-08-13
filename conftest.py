@@ -7,7 +7,7 @@ def page():
 
     with sync_playwright() as playwright:
 
-        browser = playwright.chromium.launch(HEADLESS)
+        browser = playwright.chromium.launch(headless=HEADLESS)
 
         page = browser.new_page()
 

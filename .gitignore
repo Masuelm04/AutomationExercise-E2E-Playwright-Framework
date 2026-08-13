@@ -5,4 +5,5 @@ test-results/
 screenshots/
 videos/
 traces/
+test_data/local/
 .env
