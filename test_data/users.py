@@ -1,9 +1,10 @@
-TEST_USER_LOGIN_DATA = {
+EXISTING_USER = {
+    "name": "Antonio",
     "email": "antonio123@gmail.com",
     "password": "123456",
 }
 
-TEST_USER_REGISTRATION_DATA = {
+TEST_USER_DATA = {
     "name": "Automation Test",
     "password": "Test@12345",
     "first_name": "Automation",

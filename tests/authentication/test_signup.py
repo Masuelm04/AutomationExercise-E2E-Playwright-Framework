@@ -1,35 +1,30 @@
 from pages.account_information_page import AccountInformationPage
 from pages.signup_page import SignupPage
-from test_data.users import TEST_USER_REGISTRATION_DATA
-from test_data.users import TEST_USER_LOGIN_DATA
-from utils.data_generator import generate_email
 from pages.account_page import AccountPage
 
-def test_user_registration(page):
+def test_user_registration(page, new_user):
 
     signup_page = SignupPage(page)
 
     signup_page.navigate()
 
-    email = generate_email()
-
     signup_page.signup(
-        TEST_USER_REGISTRATION_DATA["name"],
-        email
+        new_user["name"],
+        new_user["email"]
     )
 
     account_information_page = AccountInformationPage(page)
 
     account_information_page.fill_account_information(
-        password=TEST_USER_REGISTRATION_DATA["password"],
-        first_name=TEST_USER_REGISTRATION_DATA["first_name"],
-        last_name=TEST_USER_REGISTRATION_DATA["last_name"],
-        address=TEST_USER_REGISTRATION_DATA["address"],
-        country=TEST_USER_REGISTRATION_DATA["country"],
-        state=TEST_USER_REGISTRATION_DATA["state"],
-        city=TEST_USER_REGISTRATION_DATA["city"],
-        zipcode=TEST_USER_REGISTRATION_DATA["zipcode"],
-        mobile_number=TEST_USER_REGISTRATION_DATA["mobile_number"],
+        password=new_user["password"],
+        first_name=new_user["first_name"],
+        last_name=new_user["last_name"],
+        address=new_user["address"],
+        country=new_user["country"],
+        state=new_user["state"],
+        city=new_user["city"],
+        zipcode=new_user["zipcode"],
+        mobile_number=new_user["mobile_number"],
     )
 
     account_information_page.create_account()
@@ -42,15 +37,15 @@ def test_user_registration(page):
 
     assert account_page.is_user_logged()
 
-def test_registration_with_existing_email(page):
+def test_registration_with_existing_email(page, existing_user):
 
     signup_page = SignupPage(page)
 
     signup_page.navigate()
 
     signup_page.signup(
-        TEST_USER_REGISTRATION_DATA["name"],
-        TEST_USER_LOGIN_DATA["email"]
+        existing_user["name"],
+        existing_user["email"]
     )
 
     assert signup_page.is_existing_email_error_visible()
