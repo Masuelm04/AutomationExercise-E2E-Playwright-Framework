@@ -11,7 +11,7 @@ class ProductsPage(BasePage):
 
         self.products_title = page.get_by_text("All Products")
 
-        self.products_cards = page.locator(".single-products")
+        self.products_cards = page.locator(".product-image-wrapper")
 
         self.search_input = page.locator("#search_product")
 
@@ -46,3 +46,7 @@ class ProductsPage(BasePage):
         self.search_input.fill(product_name)
 
         self.search_button.click()
+
+    def get_products_matching(self, text: str):
+
+        return self.products_cards.filter(has_text=text)
