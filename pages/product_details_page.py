@@ -12,6 +12,12 @@ class ProductDetailsPage(BasePage):
 
         self.product_category = page.get_by_text("Category:")
 
+        self.product_availability = page.get_by_text("Availability:")
+
+        self.product_condition = page.get_by_text("Condition:")
+
+        self.product_brand = page.get_by_text("Brand:")
+
     def get_product_name(self) -> str:
         return self.product_name.inner_text()
 
