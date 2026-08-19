@@ -19,6 +19,12 @@ class ProductsPage(BasePage):
 
         self.searched_products_title = page.get_by_text("Searched Products")
 
+        self.categories = page.locator("#accordian")
+
+        self.category_title = page.locator(".features_items .title")
+
+        self.brands = page.locator(".brands_products")
+
     def navigate(self):
         self.page.goto(self.URL)
 
@@ -50,3 +56,15 @@ class ProductsPage(BasePage):
     def get_products_matching(self, text: str):
 
         return self.products_cards.filter(has_text=text)
+
+    def select_category(self, category: str, subcategory: str):
+
+        category_locator = self.categories.get_by_text(category, exact=True)
+
+        category_locator.click()
+
+        self.categories.get_by_text(subcategory, exact=True).click()
+
+    def select_brand(self, brand: str):
+
+        self.brands.get_by_text(brand).click()

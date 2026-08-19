@@ -1,3 +1,4 @@
+from playwright.sync_api import expect
 from pages.products_page import ProductsPage
 from pages.product_details_page import ProductDetailsPage
 
@@ -31,3 +32,23 @@ def test_view_product_details(page):
 
     assert products_details_page.product_name.is_visible()
     assert products_details_page.product_price.is_visible()
+
+def test_filter_products_by_category(page):
+
+    products_page = ProductsPage(page)
+
+    products_page.navigate()
+
+    products_page.select_category("Women", "Tops")
+
+    expect(products_page.category_title).to_contain_text("Tops")
+
+def test_filter_products_by_brand(page):
+
+    products_page = ProductsPage(page)
+
+    products_page.navigate()
+
+    products_page.select_brand("Polo")
+
+    expect(products_page.category_title).to_contain_text("Polo")
