@@ -29,6 +29,8 @@ class ProductsPage(BasePage):
 
         self.view_cart_link = page.get_by_text("View Cart")
 
+        self.continue_shopping_button = page.get_by_text("Continue Shopping")
+
     def navigate(self):
         self.page.goto(self.URL)
 
@@ -78,4 +80,14 @@ class ProductsPage(BasePage):
 
         product = self.products_cards.filter(has_text=product_name)
 
-        product.get_by_text("Add to cart").click()
+        product.hover()
+
+        product.locator(".product-overlay .add-to-cart").click()
+
+    def view_cart(self):
+
+        self.view_cart_link.click()
+
+    def continue_shopping(self):
+
+        self.continue_shopping_button.click()

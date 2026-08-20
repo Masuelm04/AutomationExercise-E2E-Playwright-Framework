@@ -19,8 +19,18 @@ class CartPage(BasePage):
     def get_product_count(self) -> int:
         return self.cart_products.count()
 
-    def add_product_to_cart(self, product_name: str):
+    def get_cart_product(self, product_name: str):
 
-        product = self.product_cards.filter(has_text=product_name)
+        return self.cart_products.filter(has_text=product_name)
 
-        product.get_by_text("Add to cart").click()
+    def get_product_quantity(self, product_name: str):
+
+        product = self.get_cart_product(product_name)
+
+        return product.locator(".cart_quantity button")
+
+    def remove_product(self, product_name: str):
+
+        product = self.get_cart_product(product_name)
+
+        product.locator(".cart_quantity_delete" ).click()
