@@ -25,6 +25,10 @@ class ProductsPage(BasePage):
 
         self.brands = page.locator(".brands_products")
 
+        self.added_modal = page.get_by_text("Added!")
+
+        self.view_cart_link = page.get_by_text("View Cart")
+
     def navigate(self):
         self.page.goto(self.URL)
 
@@ -68,3 +72,10 @@ class ProductsPage(BasePage):
     def select_brand(self, brand: str):
 
         self.brands.get_by_text(brand).click()
+
+
+    def add_product_to_cart(self, product_name: str):
+
+        product = self.products_cards.filter(has_text=product_name)
+
+        product.get_by_text("Add to cart").click()
