@@ -13,6 +13,8 @@ class CartPage(BasePage):
             "#cart_info_table tbody tr"
         )
 
+        self.proceed_to_checkout_button = page.get_by_text("Proceed To Checkout")
+
     def navigate(self):
         self.page.goto(self.URL)
 
@@ -74,3 +76,6 @@ class CartPage(BasePage):
         total_text = (self.get_product_total(product_name).inner_text())
 
         return int(total_text.replace("Rs. ", ""))
+
+    def proceed_to_checkout(self):
+            self.proceed_to_checkout_button.click()

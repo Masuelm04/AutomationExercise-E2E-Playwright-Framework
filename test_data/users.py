@@ -2,6 +2,9 @@ EXISTING_USER = {
     "name": "Antonio",
     "email": "antonio123@gmail.com",
     "password": "123456",
+    "first_name": "Antonio",
+    "last_name": "Cuesta",
+    "address": "Test MN 02223",
 }
 
 TEST_USER_DATA = {
