@@ -1,0 +1,7 @@
+PAYMENT_DATA = {
+    "name_on_card": "Automation Tester",
+    "card_number": "4111111111111111",
+    "cvc": "123",
+    "expiry_month": "12",
+    "expiry_year": "2030",
+}

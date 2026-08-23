@@ -4,6 +4,7 @@ from config.settings import HEADLESS
 from utils.data_generator import generate_email
 from test_data.users import TEST_USER_DATA
 from test_data.users import EXISTING_USER
+from test_data.payment import PAYMENT_DATA
 
 @pytest.fixture
 def page():
@@ -30,3 +31,8 @@ def new_user():
 def existing_user():
 
     return EXISTING_USER.copy()
+
+@pytest.fixture
+def payment_data():
+
+    return PAYMENT_DATA.copy()

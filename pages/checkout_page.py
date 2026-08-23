@@ -34,3 +34,9 @@ class CheckoutPage(BasePage):
         product = self.get_order_product(product_name)
 
         return product.locator(".cart_quantity")
+
+    def enter_comment(self, comment: str):
+        self.comment_input.fill(comment)
+
+    def place_order(self):
+        self.place_order_button.click()

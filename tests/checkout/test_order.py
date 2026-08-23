@@ -1,4 +1,5 @@
 from conftest import existing_user
+from pages import checkout_page
 from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage
 from pages.login_page import LoginPage
@@ -48,8 +49,8 @@ def test_order_summary(page, existing_user):
         "Blue Top"
     )
 
-    assert checkout_price == cart_price
-
     expect(product).to_be_visible()
 
     expect(checkout_page.get_order_product_price("Blue Top")).to_be_visible()
+
+    assert checkout_price == cart_price
