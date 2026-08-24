@@ -1,6 +1,8 @@
+import pytest
 from playwright.sync_api import expect
 from pages.products_page import ProductsPage
 from pages.product_details_page import ProductDetailsPage
+from utils.data_loader import load_json
 
 def test_product_page_is_displayed(page):
 

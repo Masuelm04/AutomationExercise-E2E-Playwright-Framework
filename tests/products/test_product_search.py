@@ -1,4 +1,7 @@
+import pytest
+from playwright.sync_api import expect
 from pages.products_page import ProductsPage
+from utils.data_loader import load_json
 
 def test_search_product(page):
 
@@ -10,21 +13,26 @@ def test_search_product(page):
 
     assert products_page.searched_products_title.is_visible()
 
-def test_search_results_contain_product(page):
+PRODUCTS = load_json("products.json")
+
+@pytest.mark.parametrize(
+    "product",
+    PRODUCTS
+)
+
+def test_search_results_contain_product(page, product):
 
     products_page = ProductsPage(page)
 
     products_page.navigate()
 
-    search_term = "Blue Top"
+    products_page.search_product(product["name"])
 
-    products_page.search_product(search_term)
+    matching_products = products_page.get_products_matching(product["name"]).first
 
-    matching_products = products_page.get_products_matching(
-        search_term
-    )
-
-    assert matching_products.count() > 0
+    expect(matching_products).to_be_visible()
+    
+    # assert matching_products.count() > 0
 
 def test_search_product_returns_no_results(page):
 
