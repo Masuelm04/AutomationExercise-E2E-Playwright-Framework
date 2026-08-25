@@ -17,7 +17,11 @@ PRODUCTS = load_json("products.json")
 
 @pytest.mark.parametrize(
     "product",
-    PRODUCTS
+    PRODUCTS,
+    ids=[
+        product["name"]
+        for product in PRODUCTS
+    ]
 )
 
 def test_search_results_contain_product(page, product):

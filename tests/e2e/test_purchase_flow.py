@@ -1,3 +1,4 @@
+import pytest
 from conftest import existing_user, payment_data
 from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage
@@ -6,8 +7,21 @@ from pages.products_page import ProductsPage
 from pages.payment_page import PaymentPage
 from pages.order_confirmation_page import OrderConfirmationPage
 from playwright.sync_api import expect
+from utils.data_loader import load_json
 
-def test_complete_purchase(page, existing_user, payment_data):
+CHECKOUT_CASES = load_json(
+    "checkout_data.json"
+)
+
+@pytest.mark.parametrize(
+    "checkout_case",
+    CHECKOUT_CASES,
+    ids=[
+        case["product"]
+        for case in CHECKOUT_CASES
+    ]
+)
+def test_complete_purchase(page, existing_user, payment_data, checkout_case):
 
     login_page = LoginPage(page)
     products_page = ProductsPage(page)
@@ -26,23 +40,23 @@ def test_complete_purchase(page, existing_user, payment_data):
     products_page.navigate()
 
     products_page.add_product_to_cart(
-        "Blue Top"
+        checkout_case["product"]
     )
 
     products_page.view_cart()
 
     expect(
-        cart_page.get_cart_product("Blue Top")
+        cart_page.get_cart_product(checkout_case["product"])
     ).to_be_visible()
 
     cart_page.proceed_to_checkout()
 
     expect(
-        checkout_page.get_order_product("Blue Top")
+        checkout_page.get_order_product(checkout_case["product"])
     ).to_be_visible()
 
     checkout_page.enter_comment(
-        "Automated purchase"
+        checkout_case["comment"]
     )
 
     checkout_page.place_order()

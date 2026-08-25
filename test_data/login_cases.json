@@ -1,0 +1,14 @@
+[
+    {
+        "case": "invalid_email",
+        "email": "invalid@example.com",
+        "password": "wrong_password",
+        "expected_error": "Your email or password is incorrect!"
+    },
+    {
+        "case": "invalid_password",
+        "email": "invalid2@example.com",
+        "password": "123456",
+        "expected_error": "Your email or password is incorrect!"
+    }
+]
