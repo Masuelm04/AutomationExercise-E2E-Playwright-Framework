@@ -5,6 +5,8 @@ from utils.data_generator import generate_email
 from test_data.users import TEST_USER_DATA
 from test_data.users import EXISTING_USER
 from test_data.payment import PAYMENT_DATA
+from api.user_service import UserService
+from utils.user_payload import build_create_user_payload
 
 @pytest.fixture
 def page():
@@ -36,3 +38,23 @@ def existing_user():
 def payment_data():
 
     return PAYMENT_DATA.copy()
+
+@pytest.fixture
+def api_user(new_user):
+
+    service = UserService()
+
+    payload = build_create_user_payload(new_user)
+
+    response = service.create_user(payload)
+
+    body = response.json()
+
+    assert body["responseCode"] == 201
+
+    yield new_user
+
+    service.delete_user(
+        new_user["email"],
+        new_user["password"]
+    )
