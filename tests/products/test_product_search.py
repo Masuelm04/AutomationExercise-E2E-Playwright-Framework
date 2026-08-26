@@ -35,8 +35,6 @@ def test_search_results_contain_product(page, product):
     matching_products = products_page.get_products_matching(product["name"]).first
 
     expect(matching_products).to_be_visible()
-    
-    # assert matching_products.count() > 0
 
 def test_search_product_returns_no_results(page):
 
