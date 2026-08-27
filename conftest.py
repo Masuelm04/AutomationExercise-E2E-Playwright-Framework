@@ -8,12 +8,34 @@ from test_data.payment import PAYMENT_DATA
 from api.user_service import UserService
 from utils.user_payload import build_create_user_payload
 
+def pytest_addoption(parser):
+    parser.addoption(
+        "--browser",
+        action="store",
+        default="chromium",
+        choices=[
+            "chromium",
+            "firefox",
+            "webkit",
+        ],
+        help="Browser used for test execution",
+    )
+
 @pytest.fixture
-def page():
+def browser_name(request):
+
+    return request.config.getoption(
+        "--browser"
+    )
+
+@pytest.fixture
+def page(browser_name):
 
     with sync_playwright() as playwright:
 
-        browser = playwright.chromium.launch(headless=HEADLESS)
+        browser_type = getattr(playwright, browser_name)
+
+        browser = browser_type.launch(headless=False)
 
         page = browser.new_page()
 
