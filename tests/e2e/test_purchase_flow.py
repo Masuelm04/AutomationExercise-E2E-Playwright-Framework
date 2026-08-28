@@ -13,6 +13,10 @@ CHECKOUT_CASES = load_json(
     "checkout_data.json"
 )
 
+@pytest.mark.checkout
+@pytest.mark.e2e
+@pytest.mark.critical
+@pytest.mark.regression
 @pytest.mark.parametrize(
     "checkout_case",
     CHECKOUT_CASES,

@@ -1,6 +1,11 @@
+import pytest
 from pages.account_page import AccountPage
 from pages.login_page import LoginPage
 
+@pytest.mark.authentication
+@pytest.mark.smoke
+@pytest.mark.critical
+@pytest.mark.regression
 def test_logout(page, existing_user):
 
     login_page = LoginPage(page)

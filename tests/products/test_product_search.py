@@ -3,6 +3,9 @@ from playwright.sync_api import expect
 from pages.products_page import ProductsPage
 from utils.data_loader import load_json
 
+@pytest.mark.products
+@pytest.mark.smoke
+@pytest.mark.regression
 def test_search_product(page):
 
     products_page = ProductsPage(page)
@@ -24,6 +27,8 @@ PRODUCTS = load_json("products.json")
     ]
 )
 
+@pytest.mark.products
+@pytest.mark.regression
 def test_search_results_contain_product(page, product):
 
     products_page = ProductsPage(page)
@@ -36,6 +41,8 @@ def test_search_results_contain_product(page, product):
 
     expect(matching_products).to_be_visible()
 
+@pytest.mark.products
+@pytest.mark.regression
 def test_search_product_returns_no_results(page):
 
     products_page = ProductsPage(page)

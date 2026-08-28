@@ -1,6 +1,10 @@
+import pytest
 from pages.products_page import ProductsPage
 from api.product_service import ProductService
 
+@pytest.mark.api_ui
+@pytest.mark.products
+@pytest.mark.regression
 def test_product_search_api_ui(page):
 
     search_term = "Top"

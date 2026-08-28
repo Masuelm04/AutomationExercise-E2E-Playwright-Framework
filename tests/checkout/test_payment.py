@@ -1,3 +1,4 @@
+import pytest
 from playwright.sync_api import expect
 from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage
@@ -5,6 +6,9 @@ from pages.login_page import LoginPage
 from pages.payment_page import PaymentPage
 from pages.products_page import ProductsPage
 
+@pytest.mark.checkout
+@pytest.mark.critical
+@pytest.mark.regression
 def test_proceed_to_payment(page, existing_user, payment_data):
 
     login_page = LoginPage(page)

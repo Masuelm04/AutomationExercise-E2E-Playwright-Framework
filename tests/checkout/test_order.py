@@ -1,11 +1,13 @@
+import pytest
 from conftest import existing_user
-from pages import checkout_page
 from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage
 from pages.login_page import LoginPage
 from pages.products_page import ProductsPage
 from playwright.sync_api import expect
 
+@pytest.mark.checkout
+@pytest.mark.regression
 def test_order_summary(page, existing_user):
 
     login_page = LoginPage(page)

@@ -1,7 +1,11 @@
+import pytest
 from pages.account_information_page import AccountInformationPage
 from pages.signup_page import SignupPage
 from pages.account_page import AccountPage
 
+@pytest.mark.authentication
+@pytest.mark.critical
+@pytest.mark.regression
 def test_user_registration(page, new_user):
 
     signup_page = SignupPage(page)
@@ -37,6 +41,8 @@ def test_user_registration(page, new_user):
 
     assert account_page.is_user_logged()
 
+@pytest.mark.authentication
+@pytest.mark.regression
 def test_registration_with_existing_email(page, existing_user):
 
     signup_page = SignupPage(page)

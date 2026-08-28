@@ -1,6 +1,6 @@
 import pytest
-from playwright.sync_api import Page, sync_playwright
-from config.settings import HEADLESS
+from playwright.sync_api import sync_playwright
+from config.settings import HEADLESS, DEFAULT_TIMEOUT
 from utils.data_generator import generate_email
 from test_data.users import TEST_USER_DATA
 from test_data.users import EXISTING_USER
@@ -35,9 +35,13 @@ def page(browser_name):
 
         browser_type = getattr(playwright, browser_name)
 
-        browser = browser_type.launch(headless=False)
+        browser = browser_type.launch(headless=HEADLESS)
 
         page = browser.new_page()
+
+        page.set_default_timeout(
+            DEFAULT_TIMEOUT
+        )
 
         yield page
 

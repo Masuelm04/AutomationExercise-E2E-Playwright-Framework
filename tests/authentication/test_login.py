@@ -15,7 +15,8 @@ LOGIN_CASES = load_json(
         for case in LOGIN_CASES
     ]
 )
-
+@pytest.mark.authentication
+@pytest.mark.regression
 def test_invalid_login(page, login_case):
 
     login_page = LoginPage(page)
@@ -26,6 +27,9 @@ def test_invalid_login(page, login_case):
 
     assert login_page.is_login_error_visible()
 
+@pytest.mark.authentication
+@pytest.mark.smoke
+@pytest.mark.regression
 def test_login_with_empty_credentials(page):
 
     login_page = LoginPage(page)
@@ -37,6 +41,10 @@ def test_login_with_empty_credentials(page):
     assert login_page.email_input.is_visible()
     assert login_page.password_input.is_visible()
 
+@pytest.mark.authentication
+@pytest.mark.smoke
+@pytest.mark.critical
+@pytest.mark.regression
 def test_user_login(page, existing_user):
 
     login_page = LoginPage(page)

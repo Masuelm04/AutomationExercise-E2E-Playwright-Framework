@@ -1,3 +1,4 @@
+import pytest
 from conftest import existing_user
 from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage
@@ -5,6 +6,10 @@ from pages.login_page import LoginPage
 from pages.products_page import ProductsPage
 from playwright.sync_api import expect
 
+@pytest.mark.checkout
+@pytest.mark.smoke
+@pytest.mark.critical
+@pytest.mark.regression
 def test_proceed_to_checkout(page, existing_user):
 
     login_page = LoginPage(page)
@@ -34,6 +39,9 @@ def test_proceed_to_checkout(page, existing_user):
 
     expect(checkout_page.delivery_address).to_be_visible()
 
+@pytest.mark.checkout
+@pytest.mark.critical
+@pytest.mark.regression
 def test_checkout_displays_correct_delivery_and_billing_addresses(page, existing_user):
 
     login_page = LoginPage(page)

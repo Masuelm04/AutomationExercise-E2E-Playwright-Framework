@@ -1,7 +1,12 @@
+import pytest
 from playwright.sync_api import expect
 from pages.cart_page import CartPage
 from pages.products_page import ProductsPage
 
+@pytest.mark.cart
+@pytest.mark.smoke
+@pytest.mark.critical
+@pytest.mark.regression
 def test_add_product_to_cart(page):
 
     products_page = ProductsPage(page)
@@ -20,6 +25,9 @@ def test_add_product_to_cart(page):
 
     expect(product).to_be_visible()
 
+@pytest.mark.cart
+@pytest.mark.critical
+@pytest.mark.regression
 def test_add_multiple_products_to_cart(page):
 
     products_page = ProductsPage(page)
@@ -42,6 +50,8 @@ def test_add_multiple_products_to_cart(page):
 
     assert cart_page.get_product_count() == 2
 
+@pytest.mark.cart
+@pytest.mark.regression
 def test_product_quantity_in_cart(page):
 
     products_page = ProductsPage(page)
@@ -62,6 +72,8 @@ def test_product_quantity_in_cart(page):
 
     expect(quantity).to_have_text("1")
 
+@pytest.mark.cart
+@pytest.mark.regression
 def test_add_same_product_twice(page):
 
     products_page = ProductsPage(page)
@@ -88,6 +100,8 @@ def test_add_same_product_twice(page):
 
     expect(quantity).to_have_text("2")
 
+@pytest.mark.cart
+@pytest.mark.regression
 def test_remove_product_from_cart(page):
 
     products_page = ProductsPage(page)
@@ -110,6 +124,8 @@ def test_remove_product_from_cart(page):
 
     expect(cart_page.get_cart_product("Blue Top")).to_have_count(0)
 
+@pytest.mark.cart
+@pytest.mark.regression
 def test_remove_all_products_from_cart(page):
 
     products_page = ProductsPage(page)
@@ -142,6 +158,10 @@ def test_remove_all_products_from_cart(page):
         cart_page.cart_products
     ).to_have_count(0)
 
+@pytest.mark.cart
+@pytest.mark.e2e
+@pytest.mark.critical
+@pytest.mark.regression
 def test_product_to_cart_e2e(page):
 
     products_page = ProductsPage(page)
@@ -170,6 +190,8 @@ def test_product_to_cart_e2e(page):
 
     expect(quantity).to_have_text("1")
 
+@pytest.mark.cart
+@pytest.mark.regression
 def test_product_price_is_visible(page):
 
     products_page = ProductsPage(page)
@@ -186,6 +208,8 @@ def test_product_price_is_visible(page):
 
     expect(cart_page.get_product_price("Blue Top")).to_be_visible()
 
+@pytest.mark.cart
+@pytest.mark.regression
 def test_product_subtotal_is_correct(page):
 
     products_page = ProductsPage(page)
@@ -219,7 +243,8 @@ def test_product_subtotal_is_correct(page):
     )
 
     assert subtotal == price * quantity
-
+@pytest.mark.cart
+@pytest.mark.regression
 def test_cart_persistence(page):
 
     products_page = ProductsPage(page)
