@@ -7,3 +7,4 @@ videos/
 traces/
 test_data/local/
 .env
+reports/

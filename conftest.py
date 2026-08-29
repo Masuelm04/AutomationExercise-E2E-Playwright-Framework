@@ -1,6 +1,7 @@
 import pytest
+from pathlib import Path
 from playwright.sync_api import sync_playwright
-from config.settings import HEADLESS, DEFAULT_TIMEOUT
+from config.settings import (HEADLESS, DEFAULT_TIMEOUT, SCREENSHOTS_DIR, TRACES_DIR)
 from utils.data_generator import generate_email
 from test_data.users import TEST_USER_DATA
 from test_data.users import EXISTING_USER
@@ -21,6 +22,19 @@ def pytest_addoption(parser):
         help="Browser used for test execution",
     )
 
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+
+    outcome = yield
+
+    report = outcome.get_result()
+
+    setattr(
+        item,
+        f"rep_{report.when}",
+        report
+    )
+
 @pytest.fixture
 def browser_name(request):
 
@@ -29,7 +43,7 @@ def browser_name(request):
     )
 
 @pytest.fixture
-def page(browser_name):
+def page(request, browser_name):
 
     with sync_playwright() as playwright:
 
@@ -39,11 +53,33 @@ def page(browser_name):
 
         page = browser.new_page()
 
-        page.set_default_timeout(
-            DEFAULT_TIMEOUT
-        )
+        page.set_default_timeout(DEFAULT_TIMEOUT)
+
+        Path(SCREENSHOTS_DIR).mkdir(parents=True, exist_ok=True)
+
+        Path(TRACES_DIR).mkdir(parents=True, exist_ok=True)
+
+        page.context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
         yield page
+
+        test_failed = (hasattr(request.node, "rep_call")and request.node.rep_call.failed)
+
+        if test_failed:
+
+            test_name = request.node.name
+
+            screenshot_path = (Path(SCREENSHOTS_DIR) / f"{test_name}_{browser_name}.png")
+
+            trace_path = (Path(TRACES_DIR) / f"{test_name}_{browser_name}.zip")
+
+            page.screenshot(path=str(screenshot_path), full_page=True)
+
+            page.context.tracing.stop(path=str(trace_path))
+
+        else:
+
+            page.context.tracing.stop()
 
         browser.close()
 
