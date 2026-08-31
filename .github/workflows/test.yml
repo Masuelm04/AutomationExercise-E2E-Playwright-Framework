@@ -36,3 +36,18 @@ jobs:
           HEADLESS: "true"
         run: |
           pytest -m smoke --browser chromium
+
+      - name: Upload HTML Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-html-report
+          path: reports/
+
+      - name: Upload Test Evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-test-evidence
+          path: test-results/
+          if-no-files-found: ignore
