@@ -11,7 +11,15 @@ on:
 
 jobs:
   test:
+
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        browser:
+          - chromium
+          - firefox
+          - webkit
 
     steps:
       - name: Checkout repository
@@ -27,27 +35,27 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Install Playwright browsers
+      - name: Install Playwright Browser
         run: |
-          playwright install --with-deps chromium
+          playwright install --with-deps ${{ matrix.browser }}
 
       - name: Run Smoke Tests
         env:
           HEADLESS: "true"
         run: |
-          pytest -m smoke --browser chromium
+          pytest -m smoke --browser ${{ matrix.browser }}
 
       - name: Upload HTML Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: pytest-html-report
+          name: pytest-html-report-${{ matrix.browser }}
           path: reports/
 
       - name: Upload Test Evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-test-evidence
+          name: playwright-evidence-${{ matrix.browser }}
           path: test-results/
           if-no-files-found: ignore
