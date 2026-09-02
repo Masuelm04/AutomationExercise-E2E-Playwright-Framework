@@ -70,3 +70,217 @@ Tests
   +---- API -------> Services ----------> Requests
   |
   +---- Data ------> JSON / Test Data
+
+  
+Esto ayuda muchísimo a entender el diseño.
+
+---
+
+```markdown
+## 📂 Estructura del Proyecto 
+
+```text
+.
+├── .github/
+│   └── workflows/
+│       └── tests.yml
+│
+├── api/
+│   ├── api_client.py
+│   ├── product_service.py
+│   └── user_service.py
+│
+├── config/
+│   └── settings.py
+│
+├── pages/
+│   ├── cart_page.py
+│   ├── checkout_page.py
+│   ├── login_page.py
+│   ├── payment_page.py
+│   ├── products_page.py
+│   ├── account_information_page.py
+│   ├── account_page.py
+│   ├── base_page.py
+│   ├── order_confirmation_page.py
+│   ├── product_details_page.py
+│   └── signup_page.py
+│
+├── test_data/
+│   ├── users.py
+│   ├── payment.py
+│   ├── checkout_data.json
+│   ├── login_cases.json
+│   ├── products.json
+│
+├── tests/
+│   ├── authentication/
+│   ├── products/
+│   ├── cart/
+│   ├── checkout/
+│   ├── api_ui/
+│   └── e2e/
+│
+├── utils/
+├── conftest.py
+├── pytest.ini
+├── requirements.txt
+├── .gitignore
+├── .gitattributes
+└── README.md
+
+---
+
+```markdown
+## 🎯 Estrategia de Pruebas
+
+El framework organiza las pruebas automatizadas mediante el uso de marcadores (markers) de Pytest.
+
+| Suite | Purpose |
+|---|---|
+| Smoke | Pruebas críticas del flujo principal de usuario |
+| Regression | Suite completa de pruebas de regresión |
+| E2E | Flujos de usuario de extremo a extremo (End-to-End) |
+| API_UI | Escenarios de integración entre API e interfaz de usuario |
+| Critical | Escenarios de prueba de alta prioridad |
+| Authentication | Pruebas de autenticación y gestión de usuarios |
+| Cart | Pruebas del carrito de compras |
+| Checkout | Pruebas de checkout y procesamiento de pagos |
+| Products | Pruebas del catálogo y gestión de productos |
+
+Las pruebas están diseñadas para ser independientes y ejecutarse de forma aislada, garantizando su confiabilidad, mantenibilidad y reutilización.
+
+---
+
+## 🔥 Flujo E2E Crítico
+
+```text
+Login
+  ↓
+Products
+  ↓
+Product Details
+  ↓
+Add to Cart
+  ↓
+Cart
+  ↓
+Checkout
+  ↓
+Payment
+  ↓
+Place Order
+  ↓
+Order Confirmation
+
+---
+
+## ▶️ Instalación
+
+### Prerequisitos
+
+- Python 3.12+
+- Git
+
+Clonar:
+
+```bash
+git clone <https://github.com/Masuelm04/AutomationExercise-E2E-Playwright-Framework.git>
+cd <AutomationExercise-E2E-Playwright-Framework>
+
+
+Crear entorno virtual:
+
+```markdown
+```bash
+python -m venv .venv
+
+
+En Windows PowerShell:
+
+```markdown
+```powershell
+.venv\Scripts\Activate.ps1
+
+
+Instalar dependencias:
+
+```markdown
+```bash
+pip install -r requirements.txt
+
+
+Instalar browsers:
+
+```markdown
+```bash
+playwright install
+
+## 🧪 Ejecución de Pruebas
+
+Suite completa:
+
+```markdown
+```bash
+pytest
+
+
+Smoke:
+
+```markdown
+```bash
+pytest -m smoke
+
+
+Regression:
+
+```markdown
+```bash
+pytest -m regression
+
+
+E2E:
+
+```markdown
+```bash
+pytest -m e2e
+
+
+---
+
+
+```markdown
+## 🌐 Pruebas Cross-Browser 
+
+El framework soporta Chromium, Firefox y WebKit.
+
+### Chromium
+
+```bash
+pytest --browser chromium
+
+### Firefox
+
+```bash
+pytest --browser firefox
+
+### WebKit
+
+```bash
+pytest --browser webkit
+
+## 📊 Data-Driven Testing
+
+El framework utiliza la parametrización de Pytest y datos externos en formato JSON para ejecutar un mismo comportamiento con múltiples conjuntos de datos.
+
+### Casos de uso
+- 🔐 Escenarios de autenticación
+- 🔎 Búsqueda de productos
+- 🛒 Datos de checkout
+- 💳 Flujos de compra
+
+## 🎭 Funcionalidades Avanzadas de Playwright
+
+- File Download
+- Trace Viewer
+- Screenshots on Failure
