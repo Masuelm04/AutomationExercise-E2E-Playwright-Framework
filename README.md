@@ -1,20 +1,30 @@
 # 🎭 AutomationExercise E2E Playwright Python Framework
 
-Framework profesional de automatización de pruebas UI y API, desarrollado con Python, Pytest y Playwright para la aplicación de comercio electrónico [AutomationExercise](https://www.automationexercise.com/).
+Framework profesional de automatización de pruebas UI y API desarrollado con **Python, Pytest y Playwright** para la aplicación de comercio electrónico **Automation Exercise**.
+
+🔗 https://www.automationexercise.com/
 
 ---
 
-## 📌 Sobre el proyecto
+# 📌 Sobre el Proyecto
 
-Este proyecto es un framework profesional de automatización de pruebas diseñado para validar flujos críticos de un comercio electrónico en Automation Exercise. 
+Este proyecto es un framework profesional de automatización de pruebas diseñado para validar flujos críticos de comercio electrónico en Automation Exercise.
 
-La solución combina automatización de interfaces de usuario (UI), pruebas de API, pruebas basadas en datos (Data-Driven Testing), ejecución multiplataforma en distintos navegadores, captura de evidencias ante fallos, generación de reportes e integración con procesos de Integración Continua y Entrega Continua (CI/CD).
+La solución combina:
 
-Su principal objetivo es demostrar buenas prácticas de Automatización QA escalables y mantenibles, utilizando Python, Pytest y Playwright como tecnologías base.
+- Automatización de interfaces de usuario (UI)
+- Pruebas API
+- Data-Driven Testing
+- Ejecución Cross-Browser
+- Captura automática de evidencias
+- Generación de reportes
+- Integración CI/CD mediante GitHub Actions
+
+Su principal objetivo es demostrar buenas prácticas de automatización QA escalables y mantenibles utilizando Python, Pytest y Playwright.
 
 ---
 
-## 🛠️ Tecnologías utilizadas
+# 🛠️ Tecnologías Utilizadas
 
 - Python
 - Playwright
@@ -23,11 +33,11 @@ Su principal objetivo es demostrar buenas prácticas de Automatización QA escal
 - pytest-html
 - GitHub Actions
 - JSON
-- Page Object Model
+- Page Object Model (POM)
 
 ---
 
-## ✅ Funcionalidades probadas 
+# ✅ Funcionalidades Probadas
 
 - User Registration
 - Login / Logout
@@ -45,39 +55,42 @@ Su principal objetivo es demostrar buenas prácticas de Automatización QA escal
 
 ---
 
-## 🏗️ Arquitectura del Framework
+# 🏗️ Arquitectura del Framework
 
-Este framework sigue el patrón de diseño Page Object Model (POM), lo que permite separar la lógica de las pruebas de la lógica de interacción con la interfaz de usuario.
+Este framework sigue el patrón **Page Object Model (POM)** para separar la lógica de negocio de la lógica de interacción con la interfaz.
+
+## Arquitectura General
 
 ```text
 Tests
-  |
-  v
+  │
+  ▼
 Page Objects
-  |
-  v
+  │
+  ▼
 Playwright
-  |
-  v
+  │
+  ▼
 Automation Exercise
+```
 
-Se incluyen capas adicionales para gestionar la comunicación con APIs, los datos de prueba y las utilidades compartidas, facilitando la reutilización de código y el mantenimiento del framework.
+## Capas del Framework
 
+```text
 Tests
-  |
-  +---- UI --------> Page Objects ------> Playwright
-  |
-  +---- API -------> Services ----------> Requests
-  |
-  +---- Data ------> JSON / Test Data
+  │
+  ├── UI ──────► Page Objects ──────► Playwright
+  │
+  ├── API ─────► Services ──────────► Requests
+  │
+  └── Data ────► JSON / Test Data
+```
 
-  
-Esto ayuda muchísimo a entender el diseño.
+Se incluyen capas adicionales para la comunicación con APIs, gestión de datos de prueba y utilidades compartidas, facilitando la reutilización y el mantenimiento del código.
 
 ---
 
-```markdown
-## 📂 Estructura del Proyecto 
+# 📂 Estructura del Proyecto
 
 ```text
 .
@@ -111,7 +124,7 @@ Esto ayuda muchísimo a entender el diseño.
 │   ├── payment.py
 │   ├── checkout_data.json
 │   ├── login_cases.json
-│   ├── products.json
+│   └── products.json
 │
 ├── tests/
 │   ├── authentication/
@@ -128,31 +141,31 @@ Esto ayuda muchísimo a entender el diseño.
 ├── .gitignore
 ├── .gitattributes
 └── README.md
+```
 
 ---
 
-```markdown
-## 🎯 Estrategia de Pruebas
+# 🎯 Estrategia de Pruebas
 
-El framework organiza las pruebas automatizadas mediante el uso de marcadores (markers) de Pytest.
+El framework organiza las pruebas automatizadas mediante **Pytest Markers**.
 
-| Suite | Purpose |
-|---|---|
-| Smoke | Pruebas críticas del flujo principal de usuario |
-| Regression | Suite completa de pruebas de regresión |
-| E2E | Flujos de usuario de extremo a extremo (End-to-End) |
-| API_UI | Escenarios de integración entre API e interfaz de usuario |
-| Critical | Escenarios de prueba de alta prioridad |
-| Authentication | Pruebas de autenticación y gestión de usuarios |
-| Cart | Pruebas del carrito de compras |
-| Checkout | Pruebas de checkout y procesamiento de pagos |
-| Products | Pruebas del catálogo y gestión de productos |
+| Marker | Descripción |
+|----------|-------------|
+| smoke | Pruebas críticas del flujo principal |
+| regression | Suite completa de regresión |
+| e2e | Flujos End-to-End |
+| api_ui | Integración entre API y UI |
+| critical | Escenarios de alta prioridad |
+| authentication | Gestión de usuarios y autenticación |
+| cart | Carrito de compras |
+| checkout | Flujo de checkout y pagos |
+| products | Catálogo y gestión de productos |
 
-Las pruebas están diseñadas para ser independientes y ejecutarse de forma aislada, garantizando su confiabilidad, mantenibilidad y reutilización.
+Las pruebas están diseñadas para ejecutarse de forma aislada, garantizando independencia, mantenibilidad y reutilización.
 
 ---
 
-## 🔥 Flujo E2E Crítico
+# 🔥 Flujo E2E Crítico
 
 ```text
 Login
@@ -172,172 +185,211 @@ Payment
 Place Order
   ↓
 Order Confirmation
+```
 
 ---
 
-## ▶️ Instalación
+# ▶️ Instalación
 
-### Prerequisitos
+## Prerequisitos
 
 - Python 3.12+
 - Git
 
-Clonar:
+## Clonar repositorio
 
 ```bash
-git clone <https://github.com/Masuelm04/AutomationExercise-E2E-Playwright-Framework.git>
-cd <AutomationExercise-E2E-Playwright-Framework>
+git clone https://github.com/Masuelm04/AutomationExercise-E2E-Playwright-Framework.git
 
+cd AutomationExercise-E2E-Playwright-Framework
+```
 
-Crear entorno virtual:
+## Crear entorno virtual
 
-```markdown
 ```bash
 python -m venv .venv
+```
 
+## Activar entorno virtual
 
-En Windows PowerShell:
+### Windows PowerShell
 
-```markdown
 ```powershell
 .venv\Scripts\Activate.ps1
+```
 
+### Linux / macOS
 
-Instalar dependencias:
+```bash
+source .venv/bin/activate
+```
 
-```markdown
+## Instalar dependencias
+
 ```bash
 pip install -r requirements.txt
+```
 
+## Instalar navegadores
 
-Instalar browsers:
-
-```markdown
 ```bash
 playwright install
-
-## 🧪 Ejecución de Pruebas
-
-Suite completa:
-
-```markdown
-```bash
-pytest
-
-
-Smoke:
-
-```markdown
-```bash
-pytest -m smoke
-
-
-Regression:
-
-```markdown
-```bash
-pytest -m regression
-
-
-E2E:
-
-```markdown
-```bash
-pytest -m e2e
-
+```
 
 ---
 
+# 🧪 Ejecución de Pruebas
 
-```markdown
-## 🌐 Pruebas Cross-Browser 
+## Suite completa
 
-El framework soporta Chromium, Firefox y WebKit.
+```bash
+pytest
+```
 
-### Chromium
+## Smoke
+
+```bash
+pytest -m smoke
+```
+
+## Regression
+
+```bash
+pytest -m regression
+```
+
+## E2E
+
+```bash
+pytest -m e2e
+```
+
+---
+
+# 🌐 Pruebas Cross-Browser
+
+El framework soporta:
+
+- 🌐 Chromium
+- 🦊 Firefox
+- 🧭 WebKit
+
+## Chromium
 
 ```bash
 pytest --browser chromium
+```
 
-### Firefox
+## Firefox
 
 ```bash
 pytest --browser firefox
+```
 
-### WebKit
+## WebKit
 
 ```bash
 pytest --browser webkit
+```
 
-## 📊 Data-Driven Testing
+---
 
-El framework utiliza la parametrización de Pytest y datos externos en formato JSON para ejecutar un mismo comportamiento con múltiples conjuntos de datos.
+# 📊 Data-Driven Testing
 
-### Casos de uso
+El framework utiliza parametrización de Pytest y archivos JSON externos para ejecutar el mismo comportamiento con distintos conjuntos de datos.
+
+## Casos de Uso
+
 - 🔐 Escenarios de autenticación
 - 🔎 Búsqueda de productos
 - 🛒 Datos de checkout
 - 💳 Flujos de compra
 
-## 🎭 Funcionalidades Avanzadas de Playwright
+---
 
-- File Download
-- Trace Viewer
-- Screenshots on Failure
+# 🔗 Integración API + UI
 
-## 📊 Reportes y Evidencias
+El proyecto combina operaciones de backend mediante API con validaciones realizadas desde la interfaz de usuario, permitiendo verificar la consistencia de los datos a través de múltiples capas de la aplicación.
 
-La ejecución de las pruebas genera un reporte HTML mediante **pytest-html**.
+Ejemplos:
 
-Cuando una prueba falla, el framework captura automáticamente evidencia para facilitar el análisis y la depuración del problema:
+- Crear o consultar información vía API.
+- Validar los datos mostrados en la interfaz.
+- Comparar respuestas API con elementos UI.
+- Reducir dependencias de preparación manual de datos.
 
-- 📸 Captura de pantalla de página completa (*Full-page Screenshot*)
-- 🔍 Traza de ejecución de Playwright (*Playwright Trace*)
+---
+
+# 🎭 Funcionalidades Avanzadas de Playwright
+
+- 📥 File Download
+- 🔍 Trace Viewer
+- 📸 Screenshots on Failure
+
+---
+
+# 📊 Reportes y Evidencias
+
+La ejecución de pruebas genera reportes HTML mediante **pytest-html**.
+
+Cuando una prueba falla, el framework captura automáticamente:
+
+- 📸 Captura de pantalla de página completa
+- 🔍 Playwright Trace
 
 ```text
 Ejecución de Prueba
-      |
-      +---- HTML Report
-      |
-      +---- Failure
-                |
-                +---- Screenshot
-                |
-                +---- Playwright Trace
+      │
+      ├── HTML Report
+      │
+      └── Failure
+             │
+             ├── Screenshot
+             │
+             └── Playwright Trace
+```
 
-```markdown
-Los reportes generados y las evidencias recopiladas se excluyen del control de versiones (*source control*) y se publican como artefactos (*artifacts*) del proceso de Integración Continua (CI). Esto permite acceder y analizar los resultados de las ejecuciones sin almacenar archivos temporales o generados automáticamente dentro del repositorio.
+Los reportes y evidencias generados se excluyen del control de versiones y se publican como artefactos del pipeline de Integración Continua.
 
-## CI/CD
+---
 
-GitHub Actions ejecuta automáticamente la suite de pruebas **Smoke** en los siguientes escenarios:
- 
-- 🚀 Cada vez que se realiza un **push** a la rama `main`.
-- 🔄 Cuando se crea o actualiza un **Pull Request** dirigido a la rama `main`.
-- ▶️ Mediante la ejecución manual del workflow cuando sea necesario.
+# 🚀 CI/CD
 
-La canalización de CI utiliza una matriz de navegadores para ejecutar las pruebas en:
- 
+GitHub Actions ejecuta automáticamente la suite **Smoke** en los siguientes escenarios:
+
+- 🚀 Push a `main`
+- 🔄 Pull Request hacia `main`
+- ▶️ Ejecución manual del workflow
+
+La canalización ejecuta pruebas sobre una matriz de navegadores:
+
 - 🌐 Chromium
 - 🦊 Firefox
 
+```text
 Push / Pull Request
-        ↓
+         │
+         ▼
 GitHub Actions
-        ↓
+         │
+         ▼
 Configurar Python
-        ↓
+         │
+         ▼
 Instalar Dependencias
-        ↓
+         │
+         ▼
 Matriz de Navegadores
-   ┌────────┼────────┐
-   ↓                 ↓
+   ┌────────┴────────┐
+   ▼                 ▼
 Chromium         Firefox
-   └────────┼────────┘
-            ↓
-        ↓
-Ejecutar Pruebas Smoke
-        ↓
-Generar Reportes HTML
-        ↓
-Subir Reportes y Evidencias
+   └────────┬────────┘
+            ▼
+ Ejecutar Smoke Tests
+            ▼
+ Generar HTML Reports
+            ▼
+ Subir Evidencias
+```
+
+---
