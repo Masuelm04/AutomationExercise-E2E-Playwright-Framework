@@ -284,3 +284,60 @@ El framework utiliza la parametrización de Pytest y datos externos en formato J
 - File Download
 - Trace Viewer
 - Screenshots on Failure
+
+## 📊 Reportes y Evidencias
+
+La ejecución de las pruebas genera un reporte HTML mediante **pytest-html**.
+
+Cuando una prueba falla, el framework captura automáticamente evidencia para facilitar el análisis y la depuración del problema:
+
+- 📸 Captura de pantalla de página completa (*Full-page Screenshot*)
+- 🔍 Traza de ejecución de Playwright (*Playwright Trace*)
+
+```text
+Ejecución de Prueba
+      |
+      +---- HTML Report
+      |
+      +---- Failure
+                |
+                +---- Screenshot
+                |
+                +---- Playwright Trace
+
+```markdown
+Los reportes generados y las evidencias recopiladas se excluyen del control de versiones (*source control*) y se publican como artefactos (*artifacts*) del proceso de Integración Continua (CI). Esto permite acceder y analizar los resultados de las ejecuciones sin almacenar archivos temporales o generados automáticamente dentro del repositorio.
+
+## CI/CD
+
+GitHub Actions ejecuta automáticamente la suite de pruebas **Smoke** en los siguientes escenarios:
+ 
+- 🚀 Cada vez que se realiza un **push** a la rama `main`.
+- 🔄 Cuando se crea o actualiza un **Pull Request** dirigido a la rama `main`.
+- ▶️ Mediante la ejecución manual del workflow cuando sea necesario.
+
+La canalización de CI utiliza una matriz de navegadores para ejecutar las pruebas en:
+ 
+- 🌐 Chromium
+- 🦊 Firefox
+
+Push / Pull Request
+        ↓
+GitHub Actions
+        ↓
+Configurar Python
+        ↓
+Instalar Dependencias
+        ↓
+Matriz de Navegadores
+   ┌────────┼────────┐
+   ↓                 ↓
+Chromium         Firefox
+   └────────┼────────┘
+            ↓
+        ↓
+Ejecutar Pruebas Smoke
+        ↓
+Generar Reportes HTML
+        ↓
+Subir Reportes y Evidencias
