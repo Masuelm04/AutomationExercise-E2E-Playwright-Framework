@@ -393,3 +393,5 @@ Chromium         Firefox
 ```
 
 ---
+
+## 📸 Capturas
