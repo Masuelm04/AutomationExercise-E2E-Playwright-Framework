@@ -98,6 +98,9 @@ Se incluyen capas adicionales para la comunicación con APIs, gestión de datos 
 │   └── workflows/
 │       └── tests.yml
 │
+├── docs/
+│   └──images/
+│
 ├── api/
 │   ├── api_client.py
 │   ├── product_service.py
@@ -395,3 +398,15 @@ Chromium         Firefox
 ---
 
 ## 📸 Capturas
+
+### ⚙️ GitHub Actions
+
+<p align="center">
+  <img src="docs/images/github-actions.png" width="900">
+</p>
+
+### 📊 Pytest Report
+
+<p align="center">
+  <img src="docs/images/pytest_report.png" width="900">
+</p>
