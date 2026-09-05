@@ -408,5 +408,5 @@ Chromium         Firefox
 ### 📊 Pytest Report
 
 <p align="center">
-  <img src="docs/images/pytest_report.png" width="900">
+  <img src="docs/images/pytest-report.png" width="900">
 </p>
